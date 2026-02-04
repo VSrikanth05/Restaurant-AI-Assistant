@@ -1,3 +1,10 @@
+'''
+   Orchestrates the entire application flow,
+   from environment setup to the interactive AI chat loop. 
+   It serves as the bridge between the data cleaning pipeline and the LangChain agent initialization.
+   
+'''
+
 import os
 import sys
 

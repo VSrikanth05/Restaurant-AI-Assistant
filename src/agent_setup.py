@@ -1,3 +1,14 @@
+'''
+   Configures the local Llama 3 model via Ollama and initializes the create_pandas_dataframe_agent.
+
+   ===============================================================================================
+
+   We implemented strict ReAct formatting rules and parsing error handlers to ensure the agent performs reliable data analysis.
+   
+'''
+
+
+
 import pandas as pd
 from datetime import timedelta
 from dotenv import load_dotenv

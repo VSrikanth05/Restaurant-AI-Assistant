@@ -1,3 +1,15 @@
+'''
+   Contains the ETL (Extract, Transform, Load) logic to standardize raw restaurant sales records.
+
+   ===============================================================================================
+
+   We automated date formatting and numerical validation to ensure the AI agent can perform accurate mathematical operations.
+
+'''
+
+
+
+
 import pandas as pd
 import os
 
@@ -20,10 +32,12 @@ def clean_data(input_path, output_path):
     print(f"🔄 Loading raw data from: {input_path}...")
     
     # 1. Validation: Ensure the file actually exists before crashing
+
     if not os.path.exists(input_path):
         raise FileNotFoundError(f"❌ Input file not found at {input_path}. Please download the dataset.")
 
     # Load into Pandas (Dataframe is like an Excel sheet in memory)
+
     df = pd.read_csv(input_path)
 
     # --- CLEANING LOGIC START ---
@@ -32,28 +46,34 @@ def clean_data(input_path, output_path):
     # logic: We force the 'Date' column into a Python datetime object.
     # Why? So the AI can understand "Last Week", "Month of May", or "Next 7 Days".
     # Without this, 'Date' is just dumb text to the computer.
+
     if 'Date' in df.columns:
         df['Date'] = pd.to_datetime(df['Date'], format='mixed', dayfirst=True, errors='coerce')
     
     # 3. Currency Cleaning
     # Logic: Remove '$', ',' or other symbols from price columns.
     # Why? The computer cannot calculate " $5.00 + $2.00 ". It needs " 5.0 + 2.0 ".
+
     numeric_cols = ['Total Amount', 'Price', 'Transaction Amount'] # Add any relevant columns here
     for col in numeric_cols:
         if col in df.columns and df[col].dtype == 'object':
+
             # Regex replace: remove anything that isn't a digit or a decimal point
+
             df[col] = df[col].astype(str).str.replace(r'[$,]', '', regex=True)
             df[col] = pd.to_numeric(df[col], errors='coerce')
 
     # 4. Null Handling
     # Logic: Drop rows where critical info is missing.
     # Why? A sale without a price or item name is useless for analysis and breaks calculations.
+
     df.dropna(inplace=True)
 
     # --- CLEANING LOGIC END ---
 
     # Save the clean file
     # We use 'os.makedirs' to ensure the 'data/processed' folder exists before saving
+
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     
     df.to_csv(output_path, index=False)

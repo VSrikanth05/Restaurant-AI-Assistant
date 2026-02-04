@@ -1,3 +1,10 @@
+'''
+   Handles sensitive configuration and environment variables via python-dotenv.
+
+'''
+
+
+
 import os
 import sys
 from dotenv import load_dotenv
@@ -29,6 +36,7 @@ def setup_env():
     
     # validation: Verify the specific key we need exists
     # Check for OpenRouter Key
+
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
         print("\n CRITICAL ERROR: GOOGLE_API_KEY is missing.")
