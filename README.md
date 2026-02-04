@@ -20,7 +20,7 @@ Instead of just "guessing" an answer, the agent uses the ReAct (Reason + Act) fr
 
 - Observation: The system executes that code on your cleaned_data.csv and feeds the results back to the model, which then translates the raw numbers into a clear English response.
 
-**3. Local Privacy & Efficiency (Inference Layer**)
+**3. Local Privacy & Efficiency (Inference Layer)**
 The entire process happens within your local environment using Ollama.
 
 - Data Privacy: Because the model (Llama 3) is running on your machine, your restaurant's transaction data never leaves your computer or goes to a third-party server.
@@ -64,7 +64,7 @@ This project implements a secure, local-first AI analytics platform with:
 
 ## Project Structure
 
-'''
+```
 RESTAURANT AI ASSISTANT/
 │
 ├── data/                             # Data storage layer
@@ -89,7 +89,7 @@ RESTAURANT AI ASSISTANT/
 
 ## Pipeline Architecture
 
-'''
+```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      RESTAURANT AI ANALYST WORKFLOW                         │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -129,7 +129,7 @@ RESTAURANT AI ASSISTANT/
 cd RESTAURANT_AI_ASSISTANT
 ```
 
-### 2. ### 2. Create virtual environment
+### 2. Create virtual environment
 
 ```bash
 python3 -m venv venv
@@ -156,9 +156,7 @@ pip install -r requirements.txt
 
 ---
 
-## Usage
-
-# Launch the AI Analyst 
+## Usage 
 
 ```bash
 # # Run with default configuration
@@ -169,9 +167,9 @@ python main.py
 
 ## Configuration
 
-All system rules and LLM instructions are managed in `src/agent_setup.py`:
+All system rules and LLM instructions are managed in `src/agent_setup.py`.
 
-# Critical ReAct Rules
+### Critical ReAct Rules
 
 - **Tool Restriction**: Agent is forced to use python_repl_ast for all calculations.
 
@@ -183,9 +181,9 @@ All system rules and LLM instructions are managed in `src/agent_setup.py`:
 
 ## Pipeline Steps
 
-### Step 1: Data Cleaning (`src/data/data_cleaning.py`)
+### Step 1: Data Cleaning (`src/data_cleaning.py`)
 
-``` Python
+```python
 # Standardizes raw restaurant data by validating types and removing artifacts:
 
 from src.data_cleaning import clean_data
@@ -201,9 +199,9 @@ def clean_data(input_path, output_path):
     df.to_csv(output_path, index=False)
 ```
 
-### Step 2: Agent  Initialization (`src/agent_setup.py`)
+### Step 2: Agent Initialization (`src/agent_setup.py`)
 
-```Python
+```python
 # Bridges the local Llama 3 model with the Pandas DataFrame using a specialized ReAct prompt.
 
 from src.agent_setup import create_restaurant_agent
@@ -233,31 +231,27 @@ The implementation utilizes LangChain's parsing error handlers to allow the LLM 
 
 ## Dependencies
 
-|Category | Package | Purpose |
-|-----------------------------|
+| Category | Package | Purpose |
+|---|---|---|
 |Core ML | pandas | Data manipulation & aggregation |
-|AI Framework | langchain | Agent orchestration & ReAct logic |
-|Local LLM | langchain-ollama | Local Llama 3 integration |
-|Validation | pydantic | Data structure enforcement |
-|Environment | python-dotenv | Config & security management |
+| AI Framework | langchain | Agent orchestration & ReAct logic |
+| Local LLM | langchain-ollama | Local Llama 3 integration |
+| Validation | pydantic | Data structure enforcement |
+| Environment | python-dotenv | Config & security management |
 
 ---
 
 ## Suggested Improvements for Production
 
-**Relational Database Integration**: 
-  Transition data storage from static CSV files to a relational database like MySQL. This enables the system to process        real-time sales data from POS(Point of Sale) systems across multiple branches rather than relying on historical batch files.
+**Relational Database Integration**: Transition data storage from static CSV files to a relational database like MySQL. This enables the system to process real-time sales data from POS (Point of Sale) systems across multiple branches rather than relying on historical batch files.
 
 **Business Logic Layer (Hybrid Reliability)**:
  Move critical calculations (weekly totals, trend detection) into predefined Python functions instead of relying entirely on LLM-generated code. This improves reliability and ensures the mathematical accuracy of your business KPIs.
 
-**Query Safety & Guardrails**: 
- Implement strict input validation using Pydantic and intent filters. This prevents the execution of unsafe code and blocks sensitive operations like data deletion or unauthorized system-level commands.
+**Query Safety & Guardrails**: Implement strict input validation using Pydantic and intent filters. This prevents the execution of unsafe code and blocks sensitive operations like data deletion or unauthorized system-level commands.
 
-**Web-Based User Interface**:
- Develop a browser-based dashboard using Streamlit. This allows non-technical managers to interact with the AI assistant visually through automated charts and reports without needing terminal access.
+**Web-Based User Interface**: Develop a browser-based dashboard using Streamlit. This allows non-technical managers to interact with the AI assistant visually through automated charts and reports without needing terminal access.
 
-**Conversation Memory & Context Tracking**:
- Add session memory so the assistant can handle follow-up questions. This allows the manager to perform comparative analysis, such as "Now compare that to the previous week," by maintaining context over time.
+**Conversation Memory & Context Tracking**: Add session memory so the assistant can handle follow-up questions. This allows the manager to perform comparative analysis, such as "Now compare that to the previous week," by maintaining context over time.
 
- **Decision Intelligence Layer**: Enhance the assistant to move beyond reporting data and provide proactive recommendations. For example, the agent could suggest specific promotions for low-performing menu items or automatically adjust ingredient orders based on upcoming demand forecasts.
+**Decision Intelligence Layer**: Enhance the assistant to move beyond reporting data and provide proactive recommendations. For example, the agent could suggest specific promotions for low-performing menu items or automatically adjust ingredient orders based on upcoming demand forecasts.
