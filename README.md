@@ -83,7 +83,7 @@ RESTAURANT AI ASSISTANT/
 ├── main.py                           # Application entry point & chat loop orchestrator
 ├── requirements.txt                  # Categorized project dependencies
 └── README.md                         # This file
-'''
+```
 
 ---
 
@@ -117,7 +117,7 @@ RESTAURANT AI ASSISTANT/
 │  ├── Inventory forecasting for upcoming week                                │
 │  └── Day-of-week sales trend analysis                                       │
 └─────────────────────────────────────────────────────────────────────────────┘
-'''
+```
 
 ---
 
@@ -156,10 +156,11 @@ pip install -r requirements.txt
 
 ---
 
-## Usage 
+## Usage
+
+Launch the AI Analyst:
 
 ```bash
-# # Run with default configuration
 python main.py
 ```
 
@@ -233,7 +234,7 @@ The implementation utilizes LangChain's parsing error handlers to allow the LLM 
 
 | Category | Package | Purpose |
 |---|---|---|
-|Core ML | pandas | Data manipulation & aggregation |
+| Core ML | pandas | Data manipulation & aggregation |
 | AI Framework | langchain | Agent orchestration & ReAct logic |
 | Local LLM | langchain-ollama | Local Llama 3 integration |
 | Validation | pydantic | Data structure enforcement |
@@ -245,8 +246,7 @@ The implementation utilizes LangChain's parsing error handlers to allow the LLM 
 
 **Relational Database Integration**: Transition data storage from static CSV files to a relational database like MySQL. This enables the system to process real-time sales data from POS (Point of Sale) systems across multiple branches rather than relying on historical batch files.
 
-**Business Logic Layer (Hybrid Reliability)**:
- Move critical calculations (weekly totals, trend detection) into predefined Python functions instead of relying entirely on LLM-generated code. This improves reliability and ensures the mathematical accuracy of your business KPIs.
+**Business Logic Layer (Hybrid Reliability)**: Move critical calculations (weekly totals, trend detection) into predefined Python functions instead of relying entirely on LLM-generated code. This improves reliability and ensures the mathematical accuracy of your business KPIs.
 
 **Query Safety & Guardrails**: Implement strict input validation using Pydantic and intent filters. This prevents the execution of unsafe code and blocks sensitive operations like data deletion or unauthorized system-level commands.
 
