@@ -38,7 +38,7 @@ The entire process happens within your local environment using Ollama.
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Pipeline Steps](#pipeline-steps)
-- [Key Concepts](#key-concepts-for-students)
+- [Key Concepts](#key-concepts)
 - [Dependencies](#dependencies)
 - [Suggested Improvements for Production](#suggested-improvements-for-production)
 
